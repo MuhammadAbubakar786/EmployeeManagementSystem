@@ -1,0 +1,84 @@
+﻿@model IEnumerable<EmployeeManagementSystem.Models.Employee>
+
+@{
+    ViewData["Title"] = "markAttendence";
+}
+
+<h1>markAttendence</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>
+                FirstName
+            </th>
+            <th>
+                LastName
+            </th>
+            <th>
+                Job Title
+            </th>
+           
+            <th>
+                Department
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ELastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+            </td>
+            <td>
+                    <a href="#" data-id="@item.EId" class="btn btn-warning mark">Mark Attendence</a>
+             </td>
+        </tr>
+}
+    </tbody>
+</table>
+@section Scripts{ 
+<script>
+    $(function () {
+        $('.mark').click(function () {
+            var markattendence = $(this);
+            console.log(this);
+            var Ajex_id = markattendence.data('id');
+           
+            $.ajax({
+                url: '/Employees/markAttendence',
+                type: 'Post',
+                data: {
+                    id:Ajex_id
+                },
+                success: function (response) {
+                    if (response == '1') {
+                        markattendence.removeClass("btn-warning");
+                        markattendence.addClass('btn-success');
+                        markattendence.text('Present')
+                    }
+                }
+            })
+        })
+    })
+</script>
+}

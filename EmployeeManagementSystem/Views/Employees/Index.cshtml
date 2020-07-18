@@ -1,0 +1,89 @@
+﻿@model IEnumerable<EmployeeManagementSystem.Models.Employee>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+              FirstName
+            </th>
+            <th>
+                LastName
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+               Job Title
+            </th>
+            <th>
+                Phone Number
+            </th>
+            <th>
+                   Address
+            </th>
+            <th>
+                Gender
+            </th>
+            <th>
+                City
+            </th>
+            <th>
+                Department
+            </th>
+            <th>
+                Actions 
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ELastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EPhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EGender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ECity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+            </td>
+            <td>
+                <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.EId">Edit</a> 
+            </td>
+            <td>
+                <a class="btn btn-danger" asp-action="Details" asp-route-id="@item.EId">Details</a>
+            </td>
+            <td>
+                <a class="btn btn-info" asp-action="Delete" asp-route-id="@item.EId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
